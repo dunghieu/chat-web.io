@@ -1,25 +1,20 @@
 
 var chat = {
-  // (A) INIT CHAT
   name : null, // user's name
   socket : null, // chat websocket
   ewrap : null, // html chat history
   emsg : null, // html chat message
   ego : null, // html chat go button
   init : () => {
-    // (A1) GET HTML ELEMENTS
     chat.ewrap = document.getElementById("chatShow");
     chat.emsg = document.getElementById("chatMsg");
     chat.ego = document.getElementById("chatGo");
  
-    // (A2) USER'S NAME
     chat.name = prompt("What is your name?", "John");
     if (chat.name == null || chat.name=="") { chat.name = "Mysterious"; }
  
-    // (A3) CONNECT TO CHAT SERVER
     chat.socket = new WebSocket("ws://localhost:8080");
  
-    // (A4) ON CONNECT - ANNOUNCE "I AM HERE" TO THE WORLD
     chat.socket.addEventListener("open", () => {
       chat.controls(1);
       chat.send("Joined the chat room.");
