@@ -1,0 +1,19 @@
+#chatShow{
+    border: 1px solid #ccc;
+    margin: 25px 0;
+    padding: 10px;
+}
+
+.chatRow{
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    gap: 10px;
+}
+
+.chatName{
+    font-weight: bold;
+    font-size: 16px;
+    background-color: aqua;
+    padding: 3px 5px;
+}
