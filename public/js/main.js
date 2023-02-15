@@ -9,7 +9,6 @@ const { username, room } = Qs.parse(location.search, {
 
 const socket = io();
 
-// Join chatroom
 socket.emit('joinRoom', { username, room });
 
 socket.on('roomUsers', ({ room, users }) => {
@@ -20,14 +19,12 @@ socket.on('roomUsers', ({ room, users }) => {
 socket.on('message', (message) => {
   outputMessage(message);
 
-  // Scroll down
   chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 
 chatForm.addEventListener('submit', (e) => {
     e.preventDefault();
   
-    // Get message text
     let msg = e.target.elements.msg.value;
     msg = msg.trim();
   
@@ -35,10 +32,8 @@ chatForm.addEventListener('submit', (e) => {
       return false;
     }
   
-    // Emit message to server
     socket.emit('chatMessage', msg);
   
-    // Clear input
     e.target.elements.msg.value = '';
     e.target.elements.msg.focus();
   });
