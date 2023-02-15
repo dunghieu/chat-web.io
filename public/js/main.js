@@ -25,10 +25,8 @@ var chat = {
       chat.send("Joined the chat room.");
     });
  
-    // (A5) ON RECEIVE MESSAGE - DRAW IN HTML
     chat.socket.addEventListener("message", evt => chat.draw(evt.data));
  
-    // (A6) ON ERROR & CONNECTION LOST
     chat.socket.addEventListener("close", () => {
       chat.controls();
       alert("Websocket connection lost!");
@@ -40,7 +38,6 @@ var chat = {
     });
   },
  
-  // (B) TOGGLE HTML CONTROLS
   controls : enable => {
     if (enable) {
       chat.emsg.disabled = false;
@@ -51,7 +48,6 @@ var chat = {
     }
   },
  
-  // (C) SEND MESSAGE TO CHAT SERVER
   send : msg => {
     if (msg == undefined) {
       msg = chat.emsg.value;
@@ -64,19 +60,15 @@ var chat = {
     return false;
   },
  
-  // (D) DRAW MESSAGE IN HTML
   draw : msg => {
-    // (D1) PARSE JSON
     msg = JSON.parse(msg);
     console.log(msg);
  
-    // (D2) CREATE NEW ROW
     let row = document.createElement("div");
     row.className = "chatRow";
     row.innerHTML = `<div class="chatName">${msg["name"]}</div> <div class="chatMsg">${msg["msg"]}</div>`;
     chat.ewrap.appendChild(row);
  
-    // (D3) AUTO SCROLL TO BOTTOM - MAY NOT BE THE BEST...
     window.scrollTo(0, document.body.scrollHeight);
   }
 };
